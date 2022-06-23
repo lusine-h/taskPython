@@ -1,9 +1,5 @@
-from lib2to3.pgen2 import driver
 from locators.locators import LocatorsXpath
-import selenium
-import pytest
 from selenium.webdriver.common.by import By
-from page.conftest import test_setup
 
 
 class GreenKart_elemets(LocatorsXpath):
@@ -14,6 +10,8 @@ class GreenKart_elemets(LocatorsXpath):
     def page_title_url(self,driver):
         driver = self.driver
         page_title = driver.title
+        print("*************************************************")
+        print(page_title)
         page_url = driver.current_url
         return page_title, page_url
 
@@ -87,4 +85,3 @@ class GreenKart_elemets(LocatorsXpath):
        status = success_message.is_displayed()
        print(status)
 
-       

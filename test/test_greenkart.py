@@ -1,13 +1,12 @@
-from lib2to3.pgen2 import driver
-from pickle import TRUE
 import pytest
 from locators.locators import LocatorsXpath
-from page.conftest import test_setup
+from page.conftest import Base
 from page.greenkart import GreenKart_elemets
 
 @pytest.mark.usefixtures('test_setup')
-class Test_greenKart(LocatorsXpath):
+class Test_greenKart(Base, LocatorsXpath):
     def test_page_title(self):
+        driver = self.driver
         check = GreenKart_elemets(driver)
         actual_page_url = check.page_title_url(self)
         expected_page_url = ("GreenKart - veg and fruits kart", "https://rahulshettyacademy.com/seleniumPractise/#/")
