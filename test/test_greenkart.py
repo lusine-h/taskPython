@@ -1,25 +1,27 @@
 from lib2to3.pgen2 import driver
+from pickle import TRUE
 import pytest
-from basePage.base_page import Base
+from locators.locators import LocatorsXpath
+from page.conftest import test_setup
 from page.greenkart import GreenKart_elemets
 
-@pytest.mark.usefixtures('set_up')
-class Test_greenKart():
-
-    def test_page_title(self, set_up):
+@pytest.mark.usefixtures('test_setup')
+class Test_greenKart(LocatorsXpath):
+    def test_page_title(self):
         check = GreenKart_elemets(driver)
         actual_page_url = check.page_title_url(self)
         expected_page_url = ("GreenKart - veg and fruits kart", "https://rahulshettyacademy.com/seleniumPractise/#/")
         assert actual_page_url == expected_page_url
 
-    def test_buy_mango(self,set_up):
-        check = GreenKart_elemets(driver)
-        check.add_mango_to_cart()
-
+  
+        find_mango =check.find_mango()
+        add_mango =check.add_mango_to_cart()
+        assert find_mango == True
+        assert add_mango == True
         actual_item = check.items_num()
         actual_price = check.price_num()
-        expected_item = ("Items	:	1")
-        expected_price = ("Price	:	75")
+        expected_item = ("1")
+        expected_price = ("75")
         assert actual_item == expected_item
         assert actual_price == expected_price
 
